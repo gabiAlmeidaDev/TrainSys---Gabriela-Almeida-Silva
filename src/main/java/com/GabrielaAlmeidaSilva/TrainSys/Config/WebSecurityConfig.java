@@ -14,10 +14,12 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/users").permitAll()
+                        .requestMatchers("/api/login", "/api/users").permitAll()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(httpBasic -> {});
+                .csrf(csrf -> csrf.disable())
+                .httpBasic(withDefaults -> withDefaults.configure(http));
+
 
         return http.build();
     }
