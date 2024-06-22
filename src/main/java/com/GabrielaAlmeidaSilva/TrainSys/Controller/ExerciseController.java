@@ -26,5 +26,10 @@ public class ExerciseController {
         List<ExerciseDTO> exercises = exerciseService.listAllExercises();
         return ResponseEntity.ok(exercises);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteExercise(@PathVariable Long id) {
+        exerciseService.deleteExercise(id);
+        return ResponseEntity.noContent().build();
+    }
 }
 
