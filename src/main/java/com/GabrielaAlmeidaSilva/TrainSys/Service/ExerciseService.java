@@ -8,6 +8,9 @@ import com.GabrielaAlmeidaSilva.TrainSys.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ExerciseService {
 
@@ -28,6 +31,12 @@ public class ExerciseService {
         Exercise savedExercise = exerciseRepository.save(exercise);
         exerciseDTO.setId(savedExercise.getId());
         return exerciseDTO;
+    }
+    public List<ExerciseDTO> listAllExercises() {
+        List<Exercise> exercises = exerciseRepository.findAll();
+        return exercises.stream()
+                .map(exercise -> new ExerciseDTO(exercise.getId(), exercise.getDescription(), exercise.getUser().getId()))
+                .collect(Collectors.toList());
     }
 }
 
