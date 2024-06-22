@@ -22,7 +22,7 @@ public class ExerciseService {
 
     public ExerciseDTO registerExercise(ExerciseDTO exerciseDTO) {
         User user = userRepository.findById(exerciseDTO.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
 
         Exercise exercise = new Exercise();
         exercise.setDescription(exerciseDTO.getDescription());
@@ -37,6 +37,12 @@ public class ExerciseService {
         return exercises.stream()
                 .map(exercise -> new ExerciseDTO(exercise.getId(), exercise.getDescription(), exercise.getUser().getId()))
                 .collect(Collectors.toList());
+    }
+    public void deleteExercise(Long id) {
+        if (!exerciseRepository.existsById(id)) {
+            throw new RuntimeException("Exercício não encontrado!");
+        }
+        exerciseRepository.deleteById(id);
     }
 }
 
