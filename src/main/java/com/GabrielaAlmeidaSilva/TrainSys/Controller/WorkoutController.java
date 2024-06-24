@@ -36,4 +36,9 @@ public class WorkoutController {
         WorkoutDTO updatedWorkout = workoutService.updateWorkout(id, workoutDTO);
         return ResponseEntity.ok(updatedWorkout);
     }
+    @GetMapping
+    public ResponseEntity<List<WorkoutDTO>> listAllWorkouts() {
+        List<WorkoutDTO> workouts = workoutService.listAllWorkouts();
+        return ResponseEntity.ok(workouts);
+    }
 }
