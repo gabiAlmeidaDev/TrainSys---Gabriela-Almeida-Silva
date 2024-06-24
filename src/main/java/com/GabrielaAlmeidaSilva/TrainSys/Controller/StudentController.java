@@ -21,20 +21,22 @@ public class StudentController {
         StudentDTO createdStudent = studentService.registerStudent(studentDTO);
         return new ResponseEntity<>(createdStudent, HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<StudentDTO>> listAllStudents() {
         List<StudentDTO> students = studentService.listAllStudents();
         return ResponseEntity.ok(students);
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<StudentDTO> updateStudent(@PathVariable Long id, @RequestBody StudentDTO studentDTO) {
         StudentDTO updatedStudent = studentService.updateStudent(id, studentDTO);
         return ResponseEntity.ok(updatedStudent);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
         return ResponseEntity.noContent().build();
     }
 }
-

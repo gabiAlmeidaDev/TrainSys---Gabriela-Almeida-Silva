@@ -13,4 +13,3 @@ public class PlanDTO {
     private int maxStudents;
     private double price;
 }
-

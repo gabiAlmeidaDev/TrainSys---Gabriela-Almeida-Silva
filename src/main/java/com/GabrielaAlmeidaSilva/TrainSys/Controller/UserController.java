@@ -21,9 +21,11 @@ public class UserController {
         UserDTO createdUser = userService.registerUser(userDTO);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<UserDTO> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 }
+

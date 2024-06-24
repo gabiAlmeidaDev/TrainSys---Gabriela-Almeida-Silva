@@ -46,6 +46,7 @@ public class WorkoutService {
         workoutDTO.setId(savedWorkout.getId());
         return workoutDTO;
     }
+
     public List<WorkoutDTO> listWorkoutsByStudent(Long studentId) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new RuntimeException("Aluno não encontrado!"));
@@ -65,10 +66,11 @@ public class WorkoutService {
                 ))
                 .collect(Collectors.toList());
     }
-    public void deleteWorkout(Long workoutId) {
 
+    public void deleteWorkout(Long workoutId) {
         workoutRepository.deleteById(workoutId);
     }
+
     public WorkoutDTO updateWorkout(Long workoutId, WorkoutDTO workoutDTO) {
         Workout workout = workoutRepository.findById(workoutId)
                 .orElseThrow(() -> new RuntimeException("Treino não encontrado!"));
@@ -92,6 +94,7 @@ public class WorkoutService {
         workoutDTO.setId(updatedWorkout.getId());
         return workoutDTO;
     }
+
     public List<WorkoutDTO> listAllWorkouts() {
         return workoutRepository.findAll().stream()
                 .map(workout -> new WorkoutDTO(
@@ -108,4 +111,5 @@ public class WorkoutService {
                 .collect(Collectors.toList());
     }
 }
+
 

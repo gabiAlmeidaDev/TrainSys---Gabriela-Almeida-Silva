@@ -59,6 +59,7 @@ public class StudentService {
                 ))
                 .collect(Collectors.toList());
     }
+
     public StudentDTO updateStudent(Long studentId, StudentDTO studentDTO) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new RuntimeException("Aluno não encontrado!"));
@@ -83,8 +84,10 @@ public class StudentService {
         studentDTO.setId(updatedStudent.getId());
         return studentDTO;
     }
+
     public void deleteStudent(Long studentId) {
         studentRepository.deleteById(studentId);
     }
 }
+
 

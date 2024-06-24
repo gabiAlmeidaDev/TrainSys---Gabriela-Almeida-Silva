@@ -32,18 +32,21 @@ public class ExerciseService {
         exerciseDTO.setId(savedExercise.getId());
         return exerciseDTO;
     }
+
     public List<ExerciseDTO> listAllExercises() {
         List<Exercise> exercises = exerciseRepository.findAll();
         return exercises.stream()
                 .map(exercise -> new ExerciseDTO(exercise.getId(), exercise.getDescription(), exercise.getUser().getId()))
                 .collect(Collectors.toList());
     }
+
     public void deleteExercise(Long id) {
         if (!exerciseRepository.existsById(id)) {
             throw new RuntimeException("Exercício não encontrado!");
         }
         exerciseRepository.deleteById(id);
     }
+
     public ExerciseDTO updateExercise(Long exerciseId, ExerciseDTO exerciseDTO) {
         Exercise exercise = exerciseRepository.findById(exerciseId)
                 .orElseThrow(() -> new RuntimeException("Exercício não encontrado!"));
@@ -59,4 +62,3 @@ public class ExerciseService {
         return exerciseDTO;
     }
 }
-

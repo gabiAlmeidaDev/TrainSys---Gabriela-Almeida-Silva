@@ -45,6 +45,5 @@ public class UserService {
         return userRepository.findAll().stream()
                 .map(user -> new UserDTO(user.getName(), user.getEmail(), null, user.getCpf(), user.getDateOfBirth(), user.getPlan().getId()))
                 .collect(Collectors.toList());
-
     }
 }
