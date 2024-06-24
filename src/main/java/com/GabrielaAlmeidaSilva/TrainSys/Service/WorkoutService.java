@@ -65,5 +65,8 @@ public class WorkoutService {
                 ))
                 .collect(Collectors.toList());
     }
+    public void deleteWorkout(Long workoutId) {
+        workoutRepository.deleteById(workoutId);
+    }
 }
 
