@@ -83,5 +83,8 @@ public class StudentService {
         studentDTO.setId(updatedStudent.getId());
         return studentDTO;
     }
+    public void deleteStudent(Long studentId) {
+        studentRepository.deleteById(studentId);
+    }
 }
 
