@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.DayOfWeek;
 
-
 @Entity
 @Table(name = "workouts")
 @Data
@@ -45,4 +44,3 @@ public class Workout {
     @Column(nullable = false)
     private int time;
 }
-
