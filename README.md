@@ -15,14 +15,19 @@
    - **Maven**
    - **Lombok**
    - **Docker**
+   - **Thymeleaf**
 
 ## **Escopo do Projeto**
    O projeto TrainSys tem como objetivo fornecer uma API para o gerenciamento de academias, permitindo:
-   - Cadastro e autenticação de usuários.
-   - Cadastro, listagem e deleção de exercícios.
-   - Cadastro, listagem e deleção de estudantes.
-   - Cadastro, listagem e deleção de treinos.
-   - Dashboard com visão geral dos dados.
+   
+  ## Funcionalidades
+
+- Cadastro, listagem, atualização e remoção de usuários
+- Cadastro, listagem, atualização e remoção de estudantes
+- Cadastro, listagem, atualização e remoção de exercícios
+- Cadastro, listagem, atualização e remoção de treinos
+- Autenticação e autorização de usuários
+- Dashboard com dados agregados de usuários, estudantes e planos
 
 ## **Como Executar o Sistema**
 
@@ -92,76 +97,90 @@
      ```bash
      mvn spring-boot:run
 
+A aplicação estará disponível em http://localhost:8080.
+
 **Testar a API**
 
    - Utilize o Postman ou outra ferramenta similar para testar os endpoints da API.
 
-### **Testar a API com Postman**
+## **Endpoints**
 
-  Configurar e Enviar Requisições
-      
-   1. Abrir o Postman:
+### **Usuários**
 
-      - Inicie o Postman no seu computador.
+   - `POST /api/users` - Cadastro de usuário
+   - `GET /api/users` - Listagem de usuários
+    
+### **Estudantes**
 
-   2. Criar uma Nova Requisição:
-
-      - Clique em `New`no canto superior esquerdo.
-      - Selecione `Request`.
-
-   3. Configurar a Requisição de Cadastro de Usuário:
-
-      - Nomeie a requisição como `Register User`.
-      - Defina o método HTTP como POST e a URL como `http://localhost:8080/api/users`.
-      - Vá para a aba `Body` e selecione `raw` e `JSON` no menu suspenso.
-      - Adicione o seguinte payload JSON:
-   
-            {
-              "name": "Gabriela Almeida Silva",
-              "email": "gabriela_silva33@estudante.sesisenai.org.br",
-              "password": "password123",
-              "cpf": "111.222.333-44",
-              "dateOfBirth": "1986-05-14",
-              "planId": 1
-            }
-  
-  - Clique em `Send` para enviar a requisição.
+   - `POST /api/students` - Cadastro de estudante
+   - `GET /api/students` - Listagem de estudantes
+   - `PUT /api/students/{id}` - Atualização de estudante
+   - `DELETE /api/students/{id}` - Remoção de estudante
      
-   5. Criar uma Nova Requisição para Listagem de Estudantes:
+### **Exercícios**
 
-      - Nomeie a requisição como `List Students`.
-      - Defina o método HTTP como `GET` e a URL como `http://localhost:8080/api/students`.
-      - Clique em `Send` para enviar a requisição e ver a lista de estudantes.
+   - `POST /api/exercises` - Cadastro de exercício
+   - `GET /api/exercises` - Listagem de exercícios
+   - `PUT /api/exercises/{id}` - Atualização de exercício
+   - `DELETE /api/exercises/{id}` - Remoção de exercício
 
-   6. Criar uma Nova Requisição para Cadastro de Exercícios:
+### **Treinos**
 
-      - Nomeie a requisição como `Register Exercise`.
-      - Defina o método HTTP como `POST` e a URL como `http://localhost:8080/api/exercises`.
-      - Vá para a aba `Body` e selecione `raw` e `JSON` no menu suspenso.
-      - Adicione o seguinte payload JSON:
-     
-             {
-                "description": "Supino Reto",
-                "user": {
-                "id": 1
-                }
-            }
-     
-      - Clique em Send para enviar a requisição.
+   - `POST /api/workouts` - Cadastro de treino
+   - `GET /api/workouts/students/{id}/workouts` - Listagem de treinos por estudante
+   - `PUT /api/workouts/{id}` - Atualização de treino
+   - `DELETE /api/workouts/{id}` - Remoção de treino
 
-   7. Criar uma Nova Requisição para Listagem de Treinos por Estudante:
+### **Login**
 
-      - Nomeie a requisição como `List Workouts by Student`.
-      - Defina o método HTTP como `GET` e a URL como `http://localhost:8080/api/students/1/workouts`.
-      - Clique em `Send` para enviar a requisição e ver a lista de treinos do estudante com ID 1.
+   - `POST /api/login` - Autenticação de usuário
+
+### **Dashboard**
+
+   - `GET /api/dashboard` - Dados agregados de usuários, estudantes e planos
+    
+## **Estrutura do Projeto**
+
+      src/
+      ├── main/
+      │   ├── java/
+      │   │   └── com/
+      │   │       └── GabrielaAlmeidaSilva/
+      │   │           └── TrainSys/
+      │   │               ├── Config/
+      │   │               ├── Controller/
+      │   │               ├── DTO/
+      │   │               ├── Entities/
+      │   │               ├── Repository/
+      │   │               ├── Service/
+      │   │               └── TrainSysApplication.java
+      │   └── resources/
+      │       ├── static/
+      │       │   └── css/
+      │       │       └── style.css
+      │       ├── templates/
+      │       │   └── index.html
+      │       ├── application.properties
+      │       └── data.sql
+      └── test/
+          └── java/
+              └── com/
+                  └── GabrielaAlmeidaSilva/
+                      └── TrainSys/
+
 
 # **Conclusão**
 
    O TrainSys é uma solução robusta para o gerenciamento de academias, utilizando as tecnologias mais modernas do ecossistema Java e Spring. Através desta documentação, você pode configurar e executar a aplicação em seu ambiente local para começar a gerenciar seus próprios dados de treino e alunos.
 
 
+### **Contribuindo**
+  Contribuições são bem-vindas! Por favor, abra um pull request ou reporte um issue no GitHub.
+      
+### **Licença**
+Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE para mais detalhes.
 
-
+Autora • Desenvolvido por Gabriela Almeida Silva
 
    
    
