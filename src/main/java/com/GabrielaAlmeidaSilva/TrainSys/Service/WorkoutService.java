@@ -66,7 +66,31 @@ public class WorkoutService {
                 .collect(Collectors.toList());
     }
     public void deleteWorkout(Long workoutId) {
+
         workoutRepository.deleteById(workoutId);
+    }
+    public WorkoutDTO updateWorkout(Long workoutId, WorkoutDTO workoutDTO) {
+        Workout workout = workoutRepository.findById(workoutId)
+                .orElseThrow(() -> new RuntimeException("Workout not found"));
+
+        Student student = studentRepository.findById(workoutDTO.getStudentId())
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        Exercise exercise = exerciseRepository.findById(workoutDTO.getExerciseId())
+                .orElseThrow(() -> new RuntimeException("Exercise not found"));
+
+        workout.setStudent(student);
+        workout.setExercise(exercise);
+        workout.setRepetitions(workoutDTO.getRepetitions());
+        workout.setWeight(workoutDTO.getWeight());
+        workout.setBreakTime(workoutDTO.getBreakTime());
+        workout.setDay(workoutDTO.getDay());
+        workout.setObservations(workoutDTO.getObservations());
+        workout.setTime(workoutDTO.getTime());
+
+        Workout updatedWorkout = workoutRepository.save(workout);
+        workoutDTO.setId(updatedWorkout.getId());
+        return workoutDTO;
     }
 }
 
