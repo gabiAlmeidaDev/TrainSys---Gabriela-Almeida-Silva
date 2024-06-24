@@ -26,5 +26,10 @@ public class StudentController {
         List<StudentDTO> students = studentService.listAllStudents();
         return ResponseEntity.ok(students);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<StudentDTO> updateStudent(@PathVariable Long id, @RequestBody StudentDTO studentDTO) {
+        StudentDTO updatedStudent = studentService.updateStudent(id, studentDTO);
+        return ResponseEntity.ok(updatedStudent);
+    }
 }
 
