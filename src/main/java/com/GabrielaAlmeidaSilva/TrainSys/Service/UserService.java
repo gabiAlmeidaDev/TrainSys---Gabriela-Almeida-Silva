@@ -33,7 +33,7 @@ public class UserService {
         user.setDateOfBirth(userDTO.getDateOfBirth());
 
         Plan plan = planRepository.findById(userDTO.getPlanId())
-                .orElseThrow(() -> new RuntimeException("Plan not found"));
+                .orElseThrow(() -> new RuntimeException("Plano não encontrado!"));
         user.setPlan(plan);
 
         userRepository.save(user);
