@@ -26,4 +26,9 @@ public class WorkoutController {
         List<WorkoutDTO> workouts = workoutService.listWorkoutsByStudent(id);
         return ResponseEntity.ok(workouts);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteWorkout(@PathVariable Long id) {
+        workoutService.deleteWorkout(id);
+        return ResponseEntity.noContent().build();
+    }
 }
