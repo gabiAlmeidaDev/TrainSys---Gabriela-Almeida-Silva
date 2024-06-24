@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/workouts")
 public class WorkoutController {
@@ -18,5 +20,10 @@ public class WorkoutController {
     public ResponseEntity<WorkoutDTO> registerWorkout(@RequestBody WorkoutDTO workoutDTO) {
         WorkoutDTO createdWorkout = workoutService.registerWorkout(workoutDTO);
         return new ResponseEntity<>(createdWorkout, HttpStatus.CREATED);
+    }
+    @GetMapping("/students/{id}/workouts")
+    public ResponseEntity<List<WorkoutDTO>> listWorkoutsByStudent(@PathVariable Long id) {
+        List<WorkoutDTO> workouts = workoutService.listWorkoutsByStudent(id);
+        return ResponseEntity.ok(workouts);
     }
 }
