@@ -66,7 +66,46 @@ public class WorkoutService {
                 .collect(Collectors.toList());
     }
     public void deleteWorkout(Long workoutId) {
+
         workoutRepository.deleteById(workoutId);
+    }
+    public WorkoutDTO updateWorkout(Long workoutId, WorkoutDTO workoutDTO) {
+        Workout workout = workoutRepository.findById(workoutId)
+                .orElseThrow(() -> new RuntimeException("Treino não encontrado!"));
+
+        Student student = studentRepository.findById(workoutDTO.getStudentId())
+                .orElseThrow(() -> new RuntimeException("Aluno não encontrado!"));
+
+        Exercise exercise = exerciseRepository.findById(workoutDTO.getExerciseId())
+                .orElseThrow(() -> new RuntimeException("Exercício não encontrado!"));
+
+        workout.setStudent(student);
+        workout.setExercise(exercise);
+        workout.setRepetitions(workoutDTO.getRepetitions());
+        workout.setWeight(workoutDTO.getWeight());
+        workout.setBreakTime(workoutDTO.getBreakTime());
+        workout.setDay(workoutDTO.getDay());
+        workout.setObservations(workoutDTO.getObservations());
+        workout.setTime(workoutDTO.getTime());
+
+        Workout updatedWorkout = workoutRepository.save(workout);
+        workoutDTO.setId(updatedWorkout.getId());
+        return workoutDTO;
+    }
+    public List<WorkoutDTO> listAllWorkouts() {
+        return workoutRepository.findAll().stream()
+                .map(workout -> new WorkoutDTO(
+                        workout.getId(),
+                        workout.getStudent().getId(),
+                        workout.getExercise().getId(),
+                        workout.getRepetitions(),
+                        workout.getWeight(),
+                        workout.getBreakTime(),
+                        workout.getDay(),
+                        workout.getObservations(),
+                        workout.getTime()
+                ))
+                .collect(Collectors.toList());
     }
 }
 

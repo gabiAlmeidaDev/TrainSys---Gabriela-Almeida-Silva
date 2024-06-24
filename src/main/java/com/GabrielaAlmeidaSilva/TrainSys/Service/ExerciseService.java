@@ -44,5 +44,19 @@ public class ExerciseService {
         }
         exerciseRepository.deleteById(id);
     }
+    public ExerciseDTO updateExercise(Long exerciseId, ExerciseDTO exerciseDTO) {
+        Exercise exercise = exerciseRepository.findById(exerciseId)
+                .orElseThrow(() -> new RuntimeException("Exercício não encontrado!"));
+
+        User user = userRepository.findById(exerciseDTO.getUserId())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
+
+        exercise.setDescription(exerciseDTO.getDescription());
+        exercise.setUser(user);
+
+        Exercise updatedExercise = exerciseRepository.save(exercise);
+        exerciseDTO.setId(updatedExercise.getId());
+        return exerciseDTO;
+    }
 }
 
