@@ -10,6 +10,9 @@ import com.GabrielaAlmeidaSilva.TrainSys.Repository.WorkoutRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class WorkoutService {
 
@@ -42,6 +45,25 @@ public class WorkoutService {
         Workout savedWorkout = workoutRepository.save(workout);
         workoutDTO.setId(savedWorkout.getId());
         return workoutDTO;
+    }
+    public List<WorkoutDTO> listWorkoutsByStudent(Long studentId) {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Aluno não encontrado!"));
+
+        List<Workout> workouts = workoutRepository.findByStudent(student);
+        return workouts.stream()
+                .map(workout -> new WorkoutDTO(
+                        workout.getId(),
+                        workout.getStudent().getId(),
+                        workout.getExercise().getId(),
+                        workout.getRepetitions(),
+                        workout.getWeight(),
+                        workout.getBreakTime(),
+                        workout.getDay(),
+                        workout.getObservations(),
+                        workout.getTime()
+                ))
+                .collect(Collectors.toList());
     }
 }
 
