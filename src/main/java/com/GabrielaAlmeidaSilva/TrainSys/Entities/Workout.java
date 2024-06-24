@@ -44,3 +44,4 @@ public class Workout {
     @Column(nullable = false)
     private int time;
 }
+

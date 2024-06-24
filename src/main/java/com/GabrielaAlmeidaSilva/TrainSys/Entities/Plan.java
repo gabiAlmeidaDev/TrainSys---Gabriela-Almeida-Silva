@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Table(name = "plans")
 @Data
@@ -25,4 +24,5 @@ public class Plan {
     @Column(nullable = false)
     private double price;
 }
+
 

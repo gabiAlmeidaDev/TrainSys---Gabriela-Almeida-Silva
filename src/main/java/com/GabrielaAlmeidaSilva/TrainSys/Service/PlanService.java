@@ -15,7 +15,7 @@ public class PlanService {
     @Autowired
     private PlanRepository planRepository;
 
-    public PlanDTO registerPlan(PlanDTO planDTO) {
+    public PlanDTO createPlan(PlanDTO planDTO) {
         Plan plan = new Plan();
         plan.setName(planDTO.getName());
         plan.setMaxStudents(planDTO.getMaxStudents());
@@ -26,14 +26,14 @@ public class PlanService {
         return planDTO;
     }
 
-    public List<PlanDTO> listPlans() {
+    public List<PlanDTO> getAllPlans() {
         return planRepository.findAll().stream()
                 .map(plan -> new PlanDTO(plan.getId(), plan.getName(), plan.getMaxStudents(), plan.getPrice()))
                 .collect(Collectors.toList());
     }
 
-    public PlanDTO updatePlan(Long planId, PlanDTO planDTO) {
-        Plan plan = planRepository.findById(planId)
+    public PlanDTO updatePlan(Long id, PlanDTO planDTO) {
+        Plan plan = planRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Plano não encontrado!"));
 
         plan.setName(planDTO.getName());
@@ -41,12 +41,11 @@ public class PlanService {
         plan.setPrice(planDTO.getPrice());
 
         Plan updatedPlan = planRepository.save(plan);
-        planDTO.setId(updatedPlan.getId());
-        return planDTO;
+        return new PlanDTO(updatedPlan.getId(), updatedPlan.getName(), updatedPlan.getMaxStudents(), updatedPlan.getPrice());
     }
 
-    public void deletePlan(Long planId) {
-        planRepository.deleteById(planId);
+    public void deletePlan(Long id) {
+        planRepository.deleteById(id);
     }
 }
 

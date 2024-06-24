@@ -31,4 +31,3 @@ public class LoginService {
         throw new RuntimeException("Email ou senha inválidos");
     }
 }
-

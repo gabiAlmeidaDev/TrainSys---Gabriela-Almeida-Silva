@@ -17,14 +17,14 @@ public class PlanController {
     private PlanService planService;
 
     @PostMapping
-    public ResponseEntity<PlanDTO> registerPlan(@RequestBody PlanDTO planDTO) {
-        PlanDTO createdPlan = planService.registerPlan(planDTO);
+    public ResponseEntity<PlanDTO> createPlan(@RequestBody PlanDTO planDTO) {
+        PlanDTO createdPlan = planService.createPlan(planDTO);
         return new ResponseEntity<>(createdPlan, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<PlanDTO>> listPlans() {
-        List<PlanDTO> plans = planService.listPlans();
+    public ResponseEntity<List<PlanDTO>> getAllPlans() {
+        List<PlanDTO> plans = planService.getAllPlans();
         return ResponseEntity.ok(plans);
     }
 
