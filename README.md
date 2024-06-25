@@ -178,10 +178,13 @@ A aplicação estará disponível em http://localhost:8080.
   Contribuições são bem-vindas! Por favor, abra um pull request ou reporte um issue no GitHub.
       
 ### **Licença**
-Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE para mais detalhes.
+Este projeto está licenciado sob a Licença MIT - veja o arquivo `LICENSE` para mais detalhes.
+
+______________________________________________________________________________________________________________________
 
 Autora • Desenvolvido por Gabriela Almeida Silva
 
+https://github.com/gabiAlmeidaDev/TrainSys---Gabriela-Almeida-Silva/tree/main
    
    
 
